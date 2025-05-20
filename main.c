@@ -1,7 +1,5 @@
-TRABALHO - TPE
-
-
 #include <stdio.h>
+#include <string.h>
 
 char clientes[10][30];
 int total = 0;
@@ -13,7 +11,7 @@ void adicionar() {
         total++;
         printf("Cliente adicionado!\n");
     } else {
-        printf("Limite de clientes atingido.\n");
+        printf("Limite de cliente atingido.\n");
     }
 }
 
@@ -48,6 +46,31 @@ void remover() {
     }
 }
 
+void buscar() {
+    char nome[30];
+    int encontrado = 0;
+
+    if (total == 0) {
+        printf("Nao ha clientes para buscar.\n");
+        return;
+    }
+
+    printf("Digite o nome do cliente a buscar: ");
+    scanf("%s", nome);
+
+    for (int i = 0; i < total; i++) {
+        if (strcmp(clientes[i], nome) == 0) {
+            printf("Cliente encontrado na posicao %d.\n", i + 1);
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("Cliente nao encontrado.\n");
+    }
+}
+
 int main() {
     int opcao;
 
@@ -57,6 +80,7 @@ int main() {
         printf("2 - Listar clientes\n");
         printf("3 - Remover cliente\n");
         printf("4 - Sair\n");
+        printf("5 - Buscar cliente\n"); // Adição no menu
         printf("Escolha: ");
         scanf("%d", &opcao);
 
@@ -68,8 +92,10 @@ int main() {
             remover();
         } else if (opcao == 4) {
             printf("Saindo...\n");
+        } else if (opcao == 5) {
+            buscar(); // Nova função chamada aqui
         } else {
-            printf("Opcao invalida.\n");
+            printf("Opcao invalida \n");
         }
 
     } while (opcao != 4);
